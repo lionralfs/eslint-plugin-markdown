@@ -334,6 +334,17 @@ describe("processor", () => {
             assert.strictEqual(blocks.length, 0);
         });
 
+        it("should not process 'skip-lint' code blocks", () => {
+            const code = [
+                "```js skip-lint",
+                "var answer = 6 * 7;",
+                "```"
+            ].join("\n");
+            const blocks = processor.preprocess(code);
+
+            assert.strictEqual(blocks.length, 0);
+        });
+
         it("should find code fences not surrounded by blank lines", () => {
             const code = [
                 "<!-- eslint-disable -->",
